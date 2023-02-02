@@ -5,7 +5,7 @@ The purpoise of this repo is to upload different projects developed based on dif
 
 ## Index
 
-### Project # 1 Gin + SQL
+### Project # 1 Gin + SQL: [GinSQL](/ginSql/)
 Creation of a simple web server using gin, an sql db and swagger to document all the endpoints.
 
 Frameworks used:
