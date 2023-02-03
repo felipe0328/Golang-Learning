@@ -1,4 +1,4 @@
-### Project # 1 Gin + SQL: [GinSQL](/ginSql/)
+# Project # 1 Gin + SQL: [GinSQL](/ginSql/)
 Creation of a simple web server using gin, an sql db and swagger to document all the endpoints.
 
 Frameworks used:
