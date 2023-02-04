@@ -13,7 +13,7 @@ This project is a web server imitating a task managment service, it will contain
 
 it will run in localhost:8080/docs/index.html
 
-[Swagger Web Documentation](localhost:8080/docs/index.html)
+[Swagger Web Documentation](http://localhost:8080/docs/index.html)
 
 This project is using an [uiBackery](https://uibakery.io/sql-playground) Database, to avoid the need of create a database and its migrations, making it easy for the user to test this project just running the main.go file
 
