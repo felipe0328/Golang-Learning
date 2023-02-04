@@ -4,7 +4,7 @@ import "github.com/gin-gonic/gin"
 
 func Routes(r *gin.Engine) {
 	// /////// Employees
-	r.GET("/employees")
+	r.GET("/employees", GetEmployees)
 	r.POST("/employees")
 	r.GET("/employees/:id")
 	r.PATCH("/employees/:id")
