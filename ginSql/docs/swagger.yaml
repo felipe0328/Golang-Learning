@@ -40,8 +40,7 @@ paths:
               $ref: '#/definitions/models.Employee'
             type: array
         "400":
-          description: err_code：10002
-          schema:
-            type: string
+          description: Bad Request
+          schema: {}
       summary: Get Employees
 swagger: "2.0"

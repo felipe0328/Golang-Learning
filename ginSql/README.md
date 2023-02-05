@@ -5,7 +5,7 @@ Frameworks used:
 * [GIN](https://github.com/gin-gonic/gin)
 * [Swaggo](https://github.com/swaggo/swag)
 * [Testify](https://github.com/stretchr/testify)
-
+* [Mockery](https://github.com/vektra/mockery)
 
 ## Project Description
 This project is a web server imitating a task managment service, it will containt routes to get the employees, the projects and the tasks, the swagger documentation can be found here

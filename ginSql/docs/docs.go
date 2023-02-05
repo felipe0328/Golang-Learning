@@ -33,10 +33,8 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "err_code：10002",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "description": "Bad Request",
+                        "schema": {}
                     }
                 }
             }

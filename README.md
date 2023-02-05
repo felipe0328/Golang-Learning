@@ -12,6 +12,6 @@ Frameworks used:
 * [GIN](https://github.com/gin-gonic/gin)
 * [Swaggo](https://github.com/swaggo/swag)
 * [Testify](https://github.com/stretchr/testify)
-
+* [Mockery](https://github.com/vektra/mockery)
 
 -- WIP--
