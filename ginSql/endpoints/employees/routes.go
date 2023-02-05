@@ -3,8 +3,11 @@ package employees
 import "github.com/gin-gonic/gin"
 
 func Routes(r *gin.Engine) {
-	// /////// Employees
-	r.GET("/employees", GetEmployees)
+	////////// Implementations
+	employeesGet := GetEmployeesEndpoint{}
+
+	///////// Endpoints
+	r.GET("/employees", employeesGet.GetEmployees)
 	r.POST("/employees")
 	r.GET("/employees/:id")
 	r.PATCH("/employees/:id")

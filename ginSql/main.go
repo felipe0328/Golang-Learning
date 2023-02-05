@@ -18,9 +18,8 @@ func main() {
 }
 
 func describeEndpoints(r *gin.Engine) {
-	r.GET("/ping", ping.Ping)
-
 	// Defining the routes inside each package, to be easy to read and to mantain
+	ping.Routes(r)
 	employees.Routes(r)
 	projects.Routes(r)
 	tasks.Routes(r)

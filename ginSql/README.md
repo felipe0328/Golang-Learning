@@ -4,6 +4,7 @@ Creation of a simple web server using gin, an sql db and swagger to document all
 Frameworks used:
 * [GIN](https://github.com/gin-gonic/gin)
 * [Swaggo](https://github.com/swaggo/swag)
+* [Testify](https://github.com/stretchr/testify)
 
 
 ## Project Description
