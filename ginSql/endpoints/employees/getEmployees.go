@@ -17,6 +17,6 @@ type GetEmployeesEndpoint struct{}
 // @Failure 400
 // @Router /employees [get]
 func (endpoint GetEmployeesEndpoint) GetEmployees(c *gin.Context) {
-	responseEmployees := models.Employee{}
+	responseEmployees := make([]models.Employee, 0)
 	c.JSON(http.StatusOK, responseEmployees)
 }
