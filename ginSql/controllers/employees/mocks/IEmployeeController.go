@@ -12,6 +12,62 @@ type IEmployeeController struct {
 	mock.Mock
 }
 
+// CreateEmployee provides a mock function with given fields: _a0
+func (_m *IEmployeeController) CreateEmployee(_a0 models.Employee) (models.Employee, error) {
+	ret := _m.Called(_a0)
+
+	var r0 models.Employee
+	if rf, ok := ret.Get(0).(func(models.Employee) models.Employee); ok {
+		r0 = rf(_a0)
+	} else {
+		r0 = ret.Get(0).(models.Employee)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(models.Employee) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// DeleteEmployee provides a mock function with given fields: employeeId
+func (_m *IEmployeeController) DeleteEmployee(employeeId int) error {
+	ret := _m.Called(employeeId)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(int) error); ok {
+		r0 = rf(employeeId)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// GetEmployee provides a mock function with given fields: employeeId
+func (_m *IEmployeeController) GetEmployee(employeeId int) (models.Employee, error) {
+	ret := _m.Called(employeeId)
+
+	var r0 models.Employee
+	if rf, ok := ret.Get(0).(func(int) models.Employee); ok {
+		r0 = rf(employeeId)
+	} else {
+		r0 = ret.Get(0).(models.Employee)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(int) error); ok {
+		r1 = rf(employeeId)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetEmployeesList provides a mock function with given fields:
 func (_m *IEmployeeController) GetEmployeesList() ([]models.Employee, error) {
 	ret := _m.Called()
@@ -28,6 +84,27 @@ func (_m *IEmployeeController) GetEmployeesList() ([]models.Employee, error) {
 	var r1 error
 	if rf, ok := ret.Get(1).(func() error); ok {
 		r1 = rf()
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// UpdateEmployee provides a mock function with given fields: _a0
+func (_m *IEmployeeController) UpdateEmployee(_a0 models.Employee) (models.Employee, error) {
+	ret := _m.Called(_a0)
+
+	var r0 models.Employee
+	if rf, ok := ret.Get(0).(func(models.Employee) models.Employee); ok {
+		r0 = rf(_a0)
+	} else {
+		r0 = ret.Get(0).(models.Employee)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(models.Employee) error); ok {
+		r1 = rf(_a0)
 	} else {
 		r1 = ret.Error(1)
 	}

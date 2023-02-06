@@ -43,4 +43,27 @@ paths:
           description: Bad Request
           schema: {}
       summary: Get Employees
+  /employees/:id:
+    get:
+      description: Get Employee data by id
+      parameters:
+      - description: employee ID
+        in: path
+        name: employeeID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Employee'
+        "400":
+          description: Bad Request
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      summary: Get Employee
 swagger: "2.0"

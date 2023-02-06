@@ -27,6 +27,40 @@
                     }
                 }
             }
+        },
+        "/employees/:id": {
+            "get": {
+                "description": "Get Employee data by id",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get Employee",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "employee ID",
+                        "name": "employeeID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {}
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {}
+                    }
+                }
+            }
         }
     },
     "definitions": {
