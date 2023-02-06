@@ -45,7 +45,7 @@ func (t *GetEmployeesTestSuite) TestGetEndpoint_Success() {
 	t.controller.AssertNumberOfCalls(t.Suite.T(), "GetEmployeesList", 1)
 }
 
-func (t *GetEmployeesTestSuite) TestGetEndpoint_Failed() {
+func (t *GetEmployeesTestSuite) TestGetEndpoint_ControllerError_Failed() {
 	expectedError := errors.New("expected error")
 
 	t.controller.On("GetEmployeesList").Return(nil, expectedError)

@@ -3,6 +3,7 @@ package employees_test
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -97,4 +98,29 @@ func (t *PatchEmployeeTestSuite) TestUpdateEmployee_NoBodyParam_Failed() {
 	t.NotNil(c.Errors.Last().Err)
 	t.Equal(utils.ErrMissingEmployeeData, c.Errors.Last().Err)
 	t.controller.AssertNumberOfCalls(t.T(), "UpdateEmployee", 0)
+}
+
+func (t *PatchEmployeeTestSuite) TestUpdateEmployee_ControllerError_Failed() {
+	writer := httptest.NewRecorder()
+	c, _ := gin.CreateTestContext(writer)
+
+	testUserID := "1"
+	employeeInputObject := models.Employee{
+		JobTitle: "programmer",
+	}
+
+	bodyData, _ := json.Marshal(employeeInputObject)
+	bytesBuffer := bytes.NewBuffer(bodyData)
+	req := httptest.NewRequest("POST", "/employees", bytesBuffer)
+	c.Request = req
+	c.AddParam("id", testUserID)
+
+	expectedError := errors.New("expected Error")
+	t.controller.On("UpdateEmployee", 1, employeeInputObject).Return(nil, expectedError)
+	t.endpoint.UpdateEmployee(c)
+
+	t.Equal(http.StatusBadRequest, writer.Code)
+	t.NotNil(c.Errors.Last().Err)
+	t.Equal(expectedError, c.Errors.Last().Err)
+	t.controller.AssertNumberOfCalls(t.T(), "UpdateEmployee", 1)
 }

@@ -11,6 +11,7 @@ import (
 	"github.com/golangLearning/ginSQL/controllers/employees/mocks"
 	controllerModels "github.com/golangLearning/ginSQL/controllers/employees/models"
 	"github.com/golangLearning/ginSQL/endpoints/employees"
+	"github.com/golangLearning/ginSQL/endpoints/employees/utils"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -61,6 +62,7 @@ func (t *GetEmployeeTestSuite) TestGetEmployee_NoParams_Failed() {
 
 	t.Equal(http.StatusUnprocessableEntity, writer.Code)
 	t.NotNil(c.Errors.Last().Err)
+	t.Equal(utils.ErrMissingEmployeeId, c.Errors.Last().Err)
 	t.controller.AssertNumberOfCalls(t.Suite.T(), "GetEmployee", 0)
 }
 
@@ -79,5 +81,5 @@ func (t *GetEmployeeTestSuite) TestGetEmployee_ControllerError_Failed() {
 
 	t.Equal(http.StatusBadRequest, writer.Code)
 	t.controller.AssertNumberOfCalls(t.Suite.T(), "GetEmployee", 1)
-	t.Equal(c.Errors.Last().Err, expectedError)
+	t.Equal(expectedError, c.Errors.Last().Err)
 }
