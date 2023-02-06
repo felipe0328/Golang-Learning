@@ -10,7 +10,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golangLearning/ginSQL/controllers/employees/mocks"
 	controllerModels "github.com/golangLearning/ginSQL/controllers/employees/models"
-	"github.com/golangLearning/ginSQL/endpoints/employees/models"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -30,15 +29,14 @@ func (t *GetEmployeeTestSuite) SetupTest() {
 }
 
 func (t *GetEmployeeTestSuite) TestGetEmployee_Success() {
-	testUserID := 1
+	testUserID := "1"
 
 	writer := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(writer)
-	c.Set("id", testUserID)
+	c.AddParam("id", testUserID)
 
-	userEmployee := models.GetEmployeeInput{ID: testUserID}
-	employeeResult := controllerModels.Employee{ID: testUserID, Phone: "1234"}
-	t.controller.On("GetEmployee", userEmployee).Return(employeeResult, nil)
+	employeeResult := controllerModels.Employee{ID: 1, Phone: "1234"}
+	t.controller.On("GetEmployee", 1).Return(employeeResult, nil)
 
 	expectedResult, _ := json.Marshal(employeeResult)
 
@@ -66,16 +64,15 @@ func (t *GetEmployeeTestSuite) TestGetEmployee_NoParams_Failed() {
 }
 
 func (t *GetEmployeeTestSuite) TestGetEmployee_ControllerError_Failed() {
-	testUserID := 1
+	testUserID := "1"
 
 	writer := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(writer)
-	c.Set("id", testUserID)
+	c.AddParam("id", testUserID)
 
-	userEmployee := models.GetEmployeeInput{ID: testUserID}
 	expectedError := errors.New("expected error.")
 	employeeResult := controllerModels.Employee{}
-	t.controller.On("GetEmployee", userEmployee).Return(employeeResult, expectedError)
+	t.controller.On("GetEmployee").Return(employeeResult, expectedError)
 
 	t.endpoint.GetEmployee(c)
 

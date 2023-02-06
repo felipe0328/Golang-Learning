@@ -9,8 +9,8 @@ func Routes(r *gin.Engine) {
 
 	///////// Endpoints
 	r.GET("/employees", employeesGet.GetEmployees)
-	r.POST("/employees", employeeGet.GetEmployee)
-	r.GET("/employees/:id")
+	r.POST("/employees")
+	r.GET("/employees/:id", employeeGet.GetEmployee)
 	r.PATCH("/employees/:id")
 	r.DELETE("/employees/:id")
 }
