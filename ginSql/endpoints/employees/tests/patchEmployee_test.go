@@ -116,7 +116,8 @@ func (t *PatchEmployeeTestSuite) TestUpdateEmployee_ControllerError_Failed() {
 	c.AddParam("id", testUserID)
 
 	expectedError := errors.New("expected Error")
-	t.controller.On("UpdateEmployee", 1, employeeInputObject).Return(nil, expectedError)
+	emptyEmployee := models.Employee{}
+	t.controller.On("UpdateEmployee", 1, employeeInputObject).Return(emptyEmployee, expectedError)
 	t.endpoint.UpdateEmployee(c)
 
 	t.Equal(http.StatusBadRequest, writer.Code)

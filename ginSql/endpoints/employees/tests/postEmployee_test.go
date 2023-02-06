@@ -83,7 +83,8 @@ func (t *PostEmployeeTestSuite) TestCreateEmployee_ControllerError_Failed() {
 	c.Request = req
 
 	expectedError := errors.New("expected error")
-	t.controller.On("CreateEmployee", employeeInputObject).Return(nil, expectedError)
+	emptyEmployee := models.Employee{}
+	t.controller.On("CreateEmployee", employeeInputObject).Return(emptyEmployee, expectedError)
 	t.endpoint.CreateEmployee(c)
 
 	t.Equal(http.StatusBadRequest, writer.Code)
