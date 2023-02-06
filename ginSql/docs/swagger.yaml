@@ -43,6 +43,29 @@ paths:
           description: Bad Request
           schema: {}
       summary: Get Employees
+    post:
+      description: Create employee in DB
+      parameters:
+      - description: Employee Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Employee'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Employee'
+        "400":
+          description: Bad Request
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      summary: Create Employee
   /employees/:id:
     get:
       description: Get Employee data by id

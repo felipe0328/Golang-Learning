@@ -6,10 +6,11 @@ func Routes(r *gin.Engine) {
 	////////// Implementations
 	employeesGet := GetEmployeesEndpoint{}
 	employeeGet := GetEmployeeEndpoint{}
+	employeePost := PostEmployeeEndpoint{}
 
 	///////// Endpoints
 	r.GET("/employees", employeesGet.GetEmployees)
-	r.POST("/employees")
+	r.POST("/employees", employeePost.CreateEmployee)
 	r.GET("/employees/:id", employeeGet.GetEmployee)
 	r.PATCH("/employees/:id")
 	r.DELETE("/employees/:id")
