@@ -1,6 +1,7 @@
 package employees
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,15 +27,14 @@ type PatchEmployeeEndpoint struct {
 // @Router			/employees/:id [patch]
 func (endpoint *PatchEmployeeEndpoint) UpdateEmployee(c *gin.Context) {
 	var employeeID endpointModels.GetEmployeeInput
-	err := c.BindUri(&employeeID)
-	if err != nil {
+	if err := c.ShouldBindUri(&employeeID); err != nil {
+		fmt.Println("Returnin with 422")
 		c.AbortWithError(http.StatusUnprocessableEntity, utils.ErrMissingEmployeeId)
 		return
 	}
 
 	var employeeObject models.Employee
-	err = c.BindJSON(&employeeObject)
-	if err != nil {
+	if err := c.ShouldBindJSON(&employeeObject); err != nil {
 		c.AbortWithError(http.StatusUnprocessableEntity, utils.ErrMissingEmployeeData)
 		return
 	}

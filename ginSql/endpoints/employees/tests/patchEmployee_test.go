@@ -95,5 +95,6 @@ func (t *PatchEmployeeTestSuite) TestUpdateEmployee_NoBodyParam_Failed() {
 
 	t.Equal(http.StatusUnprocessableEntity, writer.Code)
 	t.NotNil(c.Errors.Last().Err)
+	t.Equal(utils.ErrMissingEmployeeData, c.Errors.Last().Err)
 	t.controller.AssertNumberOfCalls(t.T(), "UpdateEmployee", 0)
 }
