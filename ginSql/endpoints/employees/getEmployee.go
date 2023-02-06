@@ -13,14 +13,15 @@ type GetEmployeeEndpoint struct {
 	Controller employees.IEmployeeController
 }
 
-// @Summary		Get Employee
-// @Description	Get Employee data by id
-// @Produce		json
-// @Param			employeeID	path		integer	true	"employee ID"
-// @Success		200			{object}	controllerModels.Employee
-// @Failure		422			{object}	error
-// @Failure		400			{object}	error
-// @Router			/employees/:id [get]
+//	@Summary		Get Employee
+//	@Tags			Employee
+//	@Description	Get Employee data by id
+//	@Produce		json
+//	@Param			employeeID	path		integer	true	"employee ID"
+//	@Success		200			{object}	controllerModels.Employee
+//	@Failure		422			{object}	error
+//	@Failure		400			{object}	error
+//	@Router			/employees/:id [get]
 func (endpoint GetEmployeeEndpoint) GetEmployee(c *gin.Context) {
 	var employeeInput models.GetEmployeeInput
 	err := c.BindUri(&employeeInput)

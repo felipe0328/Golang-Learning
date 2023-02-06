@@ -12,20 +12,20 @@ type IEmployeeController struct {
 	mock.Mock
 }
 
-// CreateEmployee provides a mock function with given fields: _a0
-func (_m *IEmployeeController) CreateEmployee(_a0 models.Employee) (models.Employee, error) {
-	ret := _m.Called(_a0)
+// CreateEmployee provides a mock function with given fields: employeeData
+func (_m *IEmployeeController) CreateEmployee(employeeData models.Employee) (models.Employee, error) {
+	ret := _m.Called(employeeData)
 
 	var r0 models.Employee
 	if rf, ok := ret.Get(0).(func(models.Employee) models.Employee); ok {
-		r0 = rf(_a0)
+		r0 = rf(employeeData)
 	} else {
 		r0 = ret.Get(0).(models.Employee)
 	}
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(models.Employee) error); ok {
-		r1 = rf(_a0)
+		r1 = rf(employeeData)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -91,20 +91,20 @@ func (_m *IEmployeeController) GetEmployeesList() ([]models.Employee, error) {
 	return r0, r1
 }
 
-// UpdateEmployee provides a mock function with given fields: _a0
-func (_m *IEmployeeController) UpdateEmployee(_a0 models.Employee) (models.Employee, error) {
-	ret := _m.Called(_a0)
+// UpdateEmployee provides a mock function with given fields: employeeID, employeeData
+func (_m *IEmployeeController) UpdateEmployee(employeeID int, employeeData models.Employee) (models.Employee, error) {
+	ret := _m.Called(employeeID, employeeData)
 
 	var r0 models.Employee
-	if rf, ok := ret.Get(0).(func(models.Employee) models.Employee); ok {
-		r0 = rf(_a0)
+	if rf, ok := ret.Get(0).(func(int, models.Employee) models.Employee); ok {
+		r0 = rf(employeeID, employeeData)
 	} else {
 		r0 = ret.Get(0).(models.Employee)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(models.Employee) error); ok {
-		r1 = rf(_a0)
+	if rf, ok := ret.Get(1).(func(int, models.Employee) error); ok {
+		r1 = rf(employeeID, employeeData)
 	} else {
 		r1 = ret.Error(1)
 	}

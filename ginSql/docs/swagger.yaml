@@ -43,6 +43,8 @@ paths:
           description: Bad Request
           schema: {}
       summary: Get Employees
+      tags:
+      - Employee
     post:
       description: Create employee in DB
       parameters:
@@ -66,6 +68,8 @@ paths:
           description: Unprocessable Entity
           schema: {}
       summary: Create Employee
+      tags:
+      - Employees
   /employees/:id:
     get:
       description: Get Employee data by id
@@ -89,4 +93,36 @@ paths:
           description: Unprocessable Entity
           schema: {}
       summary: Get Employee
+      tags:
+      - Employee
+    patch:
+      description: Update Employee
+      parameters:
+      - description: Employee ID
+        in: path
+        name: employeeID
+        required: true
+        type: integer
+      - description: Employee Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Employee'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/models.Employee'
+        "400":
+          description: Bad Request
+          schema: {}
+        "422":
+          description: Unprocessable Entity
+          schema: {}
+      summary: Patch Employee
+      tags:
+      - Employees
 swagger: "2.0"

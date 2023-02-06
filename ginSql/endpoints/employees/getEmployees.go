@@ -14,6 +14,7 @@ type GetEmployeesEndpoint struct {
 // getEmployees godoc
 //
 //	@Summary		Get Employees
+//	@Tags			Employee
 //	@Description	Get List of employees
 //	@Produce		json
 //	@Success		200	{object}	[]models.Employee

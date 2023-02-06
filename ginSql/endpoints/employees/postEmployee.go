@@ -12,14 +12,15 @@ type PostEmployeeEndpoint struct {
 	Controller employees.IEmployeeController
 }
 
-// @Summary		Create Employee
-// @Description	Create employee in DB
-// @Produce		json
-// @Param			body	body		models.Employee	true	"Employee Object"
-// @Success		200		{object}	models.Employee
-// @Failure		400		{object}	error
-// @Failure		422		{object}	error
-// @Router			/employees [post]
+//	@Summary		Create Employee
+//	@Tags			Employees
+//	@Description	Create employee in DB
+//	@Produce		json
+//	@Param			body	body		models.Employee	true	"Employee Object"
+//	@Success		200		{object}	models.Employee
+//	@Failure		400		{object}	error
+//	@Failure		422		{object}	error
+//	@Router			/employees [post]
 func (endpoint *PostEmployeeEndpoint) CreateEmployee(c *gin.Context) {
 	var employeeObject models.Employee
 	if err := c.BindJSON(&employeeObject); err != nil {

@@ -21,6 +21,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Employee"
+                ],
                 "summary": "Get Employees",
                 "responses": {
                     "200": {
@@ -42,6 +45,9 @@ const docTemplate = `{
                 "description": "Create employee in DB",
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Employees"
                 ],
                 "summary": "Create Employee",
                 "parameters": [
@@ -79,6 +85,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Employee"
+                ],
                 "summary": "Get Employee",
                 "parameters": [
                     {
@@ -92,6 +101,50 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {}
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {}
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update Employee",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Patch Employee",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Employee ID",
+                        "name": "employeeID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Employee Object",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
                         "schema": {
                             "$ref": "#/definitions/models.Employee"
                         }
