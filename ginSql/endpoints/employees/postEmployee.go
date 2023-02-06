@@ -9,25 +9,25 @@ import (
 )
 
 type PostEmployeeEndpoint struct {
-	controller employees.IEmployeeController
+	Controller employees.IEmployeeController
 }
 
-//	@Summary		Create Employee
-//	@Description	Create employee in DB
-//	@Produce		json
-//	@Param			body	body		models.Employee	true	"Employee Object"
-//	@Success		200		{object}	models.Employee
-//	@Failure		400		{object}	error
-//	@Failure		422		{object}	error
-//	@Router			/employees [post]
+// @Summary		Create Employee
+// @Description	Create employee in DB
+// @Produce		json
+// @Param			body	body		models.Employee	true	"Employee Object"
+// @Success		200		{object}	models.Employee
+// @Failure		400		{object}	error
+// @Failure		422		{object}	error
+// @Router			/employees [post]
 func (endpoint *PostEmployeeEndpoint) CreateEmployee(c *gin.Context) {
 	var employeeObject models.Employee
-	if err := c.ShouldBind(employeeObject); err != nil {
+	if err := c.BindJSON(&employeeObject); err != nil {
 		c.AbortWithError(http.StatusUnprocessableEntity, err)
 		return
 	}
 
-	resultEmployee, err := endpoint.controller.CreateEmployee(employeeObject)
+	resultEmployee, err := endpoint.Controller.CreateEmployee(employeeObject)
 
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)

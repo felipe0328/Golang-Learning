@@ -8,7 +8,7 @@ import (
 )
 
 type GetEmployeesEndpoint struct {
-	controller employees.IEmployeeController
+	Controller employees.IEmployeeController
 }
 
 // getEmployees godoc
@@ -20,7 +20,7 @@ type GetEmployeesEndpoint struct {
 //	@Failure		400	{object}	error
 //	@Router			/employees [get]
 func (endpoint GetEmployeesEndpoint) GetEmployees(c *gin.Context) {
-	responseEmployees, err := endpoint.controller.GetEmployeesList()
+	responseEmployees, err := endpoint.Controller.GetEmployeesList()
 
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)

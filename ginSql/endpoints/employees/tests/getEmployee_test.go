@@ -1,4 +1,4 @@
-package employees
+package employees_test
 
 import (
 	"encoding/json"
@@ -10,13 +10,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golangLearning/ginSQL/controllers/employees/mocks"
 	controllerModels "github.com/golangLearning/ginSQL/controllers/employees/models"
+	"github.com/golangLearning/ginSQL/endpoints/employees"
 	"github.com/stretchr/testify/suite"
 )
 
 type GetEmployeeTestSuite struct {
 	suite.Suite
 	controller *mocks.IEmployeeController
-	endpoint   GetEmployeeEndpoint
+	endpoint   employees.GetEmployeeEndpoint
 }
 
 func EmployeeGetTest(t *testing.T) {
@@ -25,7 +26,7 @@ func EmployeeGetTest(t *testing.T) {
 
 func (t *GetEmployeeTestSuite) SetupTest() {
 	t.controller = new(mocks.IEmployeeController)
-	t.endpoint = GetEmployeeEndpoint{controller: t.controller}
+	t.endpoint = employees.GetEmployeeEndpoint{Controller: t.controller}
 }
 
 func (t *GetEmployeeTestSuite) TestGetEmployee_Success() {
