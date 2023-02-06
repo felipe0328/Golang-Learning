@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golangLearning/ginSQL/controllers/employees"
-	"github.com/golangLearning/ginSQL/controllers/employees/models"
+	"github.com/golangLearning/ginSQL/dals/employees/models"
 	endpointModels "github.com/golangLearning/ginSQL/endpoints/employees/models"
 	"github.com/golangLearning/ginSQL/endpoints/employees/utils"
 )

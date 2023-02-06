@@ -9,7 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golangLearning/ginSQL/controllers/employees/mocks"
-	controllerModels "github.com/golangLearning/ginSQL/controllers/employees/models"
+	controllerModels "github.com/golangLearning/ginSQL/dals/employees/models"
 	"github.com/golangLearning/ginSQL/endpoints/employees"
 	"github.com/golangLearning/ginSQL/endpoints/employees/utils"
 	"github.com/stretchr/testify/suite"

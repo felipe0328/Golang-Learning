@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	models "github.com/golangLearning/ginSQL/controllers/employees/models"
+	models "github.com/golangLearning/ginSQL/dals/employees/models"
 	mock "github.com/stretchr/testify/mock"
 )
 
