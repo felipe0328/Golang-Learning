@@ -25,3 +25,5 @@ To use the project just run
 If you want to run the tests, just run
     
     go test ./...
+
+The swagger documentation will be found in `localhost:8080/docs/index.html`
