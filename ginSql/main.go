@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	dalbase "github.com/golangLearning/ginSQL/dals/dalBase"
 	docs "github.com/golangLearning/ginSQL/docs"
 	"github.com/golangLearning/ginSQL/endpoints/employees"
 	"github.com/golangLearning/ginSQL/endpoints/ping"
@@ -18,9 +19,12 @@ func main() {
 }
 
 func describeEndpoints(r *gin.Engine) {
+	// GetDB
+	db := dalbase.GetDB()
+
 	// Defining the routes inside each package, to be easy to read and to mantain
 	ping.Routes(r)
-	employees.Routes(r)
+	employees.Routes(r, db)
 	projects.Routes(r)
 	tasks.Routes(r)
 
