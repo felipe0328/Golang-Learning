@@ -1,6 +1,8 @@
 package employees
 
 import (
+	"encoding/json"
+
 	"github.com/golangLearning/ginSQL/dals/employees/models"
 	"github.com/jackc/pgx"
 )
@@ -18,7 +20,7 @@ type EmployeeDal struct {
 }
 
 func (d *EmployeeDal) GetEmployeees() ([]models.Employee, error) {
-	query := `Select * from employees`
+	query := `Select row_to_json(e.*) from employees e`
 	rows, err := d.Query(query)
 
 	employeesData := make([]models.Employee, 0)
@@ -28,24 +30,17 @@ func (d *EmployeeDal) GetEmployeees() ([]models.Employee, error) {
 	}
 
 	for rows.Next() {
-		employee := models.Employee{}
+		var employee models.Employee
+		var output []byte
 		err := rows.Scan(
-			&employee.ID,
-			&employee.City,
-			&employee.Country,
-			&employee.Email,
-			&employee.FirstName,
-			&employee.FullName,
-			&employee.Image,
-			&employee.JobTitle,
-			&employee.LastName,
-			&employee.OnboardingCompletion,
-			&employee.Phone,
+			&output,
 		)
 
 		if err != nil {
 			return employeesData, err
 		}
+
+		json.Unmarshal(output, &employee)
 
 		employeesData = append(employeesData, employee)
 	}
