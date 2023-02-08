@@ -9,6 +9,9 @@ import (
 var connectionPool *pgx.ConnPool
 
 func connectToDB() *pgx.ConnPool {
+	// This database connection are from a sample database online
+	// using this way to be easier for others to test this project
+	// since it is a demo project
 	conf := pgx.ConnConfig{
 		Host:     "psql-mock-database-cloud.postgres.database.azure.com",
 		User:     "miqcymvpmzslcwiixonyohhc@psql-mock-database-cloud",
