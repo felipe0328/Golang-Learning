@@ -7,13 +7,38 @@ package graph
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"github.com/golangLearning/gql/graph/model"
 )
 
 // UpsertCharacter is the resolver for the upsertCharacter field.
 func (r *mutationResolver) UpsertCharacter(ctx context.Context, input model.CharacterInput) (*model.Character, error) {
-	panic(fmt.Errorf("not implemented: UpsertCharacter - upsertCharacter"))
+	id := input.ID
+	var character model.Character
+	character.Name = input.Name
+
+	n := len(r.Resolver.CharacterStore)
+
+	if n == 0 {
+		r.Resolver.CharacterStore = make(map[string]model.Character)
+	}
+
+	if id != nil {
+		_, ok := r.Resolver.CharacterStore[*id]
+		if !ok {
+			return nil, fmt.Errorf("not found")
+		}
+		r.Resolver.CharacterStore[*id] = character
+		character.ID = *id
+	} else {
+		// Generate new ID and object
+		newID := strconv.Itoa(n + 1)
+		character.ID = newID
+		r.Resolver.CharacterStore[newID] = character
+	}
+
+	return &character, nil
 }
 
 // Character is the resolver for the character field.
