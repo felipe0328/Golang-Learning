@@ -29,8 +29,8 @@ func (r *mutationResolver) UpsertCharacter(ctx context.Context, input model.Char
 		if !ok {
 			return nil, fmt.Errorf("not found")
 		}
-		r.Resolver.CharacterStore[*id] = character
 		character.ID = *id
+		r.Resolver.CharacterStore[*id] = character
 	} else {
 		// Generate new ID and object
 		newID := strconv.Itoa(n + 1)
