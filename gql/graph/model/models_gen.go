@@ -2,6 +2,16 @@
 
 package model
 
+type Character struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type CharacterInput struct {
+	Name string  `json:"name"`
+	ID   *string `json:"id"`
+}
+
 type NewTodo struct {
 	Text   string `json:"text"`
 	UserID string `json:"userId"`
