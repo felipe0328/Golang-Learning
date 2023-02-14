@@ -59,6 +59,30 @@ func (r *queryResolver) Character(ctx context.Context, id string) (*model.Charac
 	return &character, nil
 }
 
+// Characters is the resolver for the characters field.
+func (r *queryResolver) Characters(ctx context.Context, cliqueType model.CliqueType) ([]*model.Character, error) {
+	characters := make([]*model.Character, 0)
+	for idx := range r.Resolver.CharacterStore {
+		character := r.Resolver.CharacterStore[idx]
+		if character.CliqueType == cliqueType {
+			characters = append(characters, &character)
+		}
+	}
+
+	return characters, nil
+}
+
+// CharactersList is the resolver for the charactersList field.
+func (r *queryResolver) CharactersList(ctx context.Context) ([]*model.Character, error) {
+	characters := make([]*model.Character, 0)
+	for idx := range r.Resolver.CharacterStore {
+		character := r.Resolver.CharacterStore[idx]
+		characters = append(characters, &character)
+	}
+
+	return characters, nil
+}
+
 // Pogues is the resolver for the pogues field.
 func (r *queryResolver) Pogues(ctx context.Context) ([]*model.Character, error) {
 	panic(fmt.Errorf("not implemented: Pogues - pogues"))

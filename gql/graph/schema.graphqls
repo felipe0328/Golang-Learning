@@ -1,6 +1,8 @@
 
 type Query {
   character (id:ID!): Character
+  characters(cliqueType:CliqueType!):[Character!]
+  charactersList:[Character]
   pogues: [Character]!
   kooks: [Character]!
 }
