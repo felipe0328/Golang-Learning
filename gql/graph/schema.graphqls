@@ -19,7 +19,7 @@ type Character {
 input CharacterInput {
   name: String!
   id: String
-  isHero: Boolean!
+  isHero: Boolean
   cliqueType: CliqueType!
 }
 

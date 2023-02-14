@@ -18,7 +18,7 @@ type Character struct {
 type CharacterInput struct {
 	Name       string     `json:"name"`
 	ID         *string    `json:"id"`
-	IsHero     bool       `json:"isHero"`
+	IsHero     *bool      `json:"isHero"`
 	CliqueType CliqueType `json:"cliqueType"`
 }
 

@@ -17,6 +17,10 @@ func (r *mutationResolver) UpsertCharacter(ctx context.Context, input model.Char
 	id := input.ID
 	var character model.Character
 	character.Name = input.Name
+	character.CliqueType = input.CliqueType
+	if input.IsHero != nil {
+		character.IsHero = *input.IsHero
+	}
 
 	n := len(r.Resolver.CharacterStore)
 
@@ -25,10 +29,14 @@ func (r *mutationResolver) UpsertCharacter(ctx context.Context, input model.Char
 	}
 
 	if id != nil {
-		_, ok := r.Resolver.CharacterStore[*id]
+		cs, ok := r.Resolver.CharacterStore[*id]
 		if !ok {
 			return nil, fmt.Errorf("not found")
 		}
+		if input.IsHero == nil {
+			character.IsHero = cs.IsHero
+		}
+
 		character.ID = *id
 		r.Resolver.CharacterStore[*id] = character
 	} else {

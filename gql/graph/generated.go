@@ -2664,7 +2664,7 @@ func (ec *executionContext) unmarshalInputCharacterInput(ctx context.Context, ob
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("isHero"))
-			it.IsHero, err = ec.unmarshalNBoolean2bool(ctx, v)
+			it.IsHero, err = ec.unmarshalOBoolean2ᚖbool(ctx, v)
 			if err != nil {
 				return it, err
 			}
