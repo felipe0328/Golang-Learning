@@ -45,8 +45,10 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Character struct {
-		ID   func(childComplexity int) int
-		Name func(childComplexity int) int
+		CliqueType func(childComplexity int) int
+		ID         func(childComplexity int) int
+		IsHero     func(childComplexity int) int
+		Name       func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -84,12 +86,26 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	_ = ec
 	switch typeName + "." + field {
 
+	case "Character.cliqueType":
+		if e.complexity.Character.CliqueType == nil {
+			break
+		}
+
+		return e.complexity.Character.CliqueType(childComplexity), true
+
 	case "Character.id":
 		if e.complexity.Character.ID == nil {
 			break
 		}
 
 		return e.complexity.Character.ID(childComplexity), true
+
+	case "Character.isHero":
+		if e.complexity.Character.IsHero == nil {
+			break
+		}
+
+		return e.complexity.Character.IsHero(childComplexity), true
 
 	case "Character.name":
 		if e.complexity.Character.Name == nil {
@@ -395,6 +411,94 @@ func (ec *executionContext) fieldContext_Character_name(ctx context.Context, fie
 	return fc, nil
 }
 
+func (ec *executionContext) _Character_isHero(ctx context.Context, field graphql.CollectedField, obj *model.Character) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Character_isHero(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IsHero, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Character_isHero(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Character",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Character_cliqueType(ctx context.Context, field graphql.CollectedField, obj *model.Character) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Character_cliqueType(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CliqueType, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CliqueType)
+	fc.Result = res
+	return ec.marshalNCliqueType2githubᚗcomᚋgolangLearningᚋgqlᚋgraphᚋmodelᚐCliqueType(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Character_cliqueType(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Character",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CliqueType does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Mutation_upsertCharacter(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Mutation_upsertCharacter(ctx, field)
 	if err != nil {
@@ -437,6 +541,10 @@ func (ec *executionContext) fieldContext_Mutation_upsertCharacter(ctx context.Co
 				return ec.fieldContext_Character_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Character_name(ctx, field)
+			case "isHero":
+				return ec.fieldContext_Character_isHero(ctx, field)
+			case "cliqueType":
+				return ec.fieldContext_Character_cliqueType(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Character", field.Name)
 		},
@@ -494,6 +602,10 @@ func (ec *executionContext) fieldContext_Query_character(ctx context.Context, fi
 				return ec.fieldContext_Character_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Character_name(ctx, field)
+			case "isHero":
+				return ec.fieldContext_Character_isHero(ctx, field)
+			case "cliqueType":
+				return ec.fieldContext_Character_cliqueType(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Character", field.Name)
 		},
@@ -554,6 +666,10 @@ func (ec *executionContext) fieldContext_Query_pogues(ctx context.Context, field
 				return ec.fieldContext_Character_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Character_name(ctx, field)
+			case "isHero":
+				return ec.fieldContext_Character_isHero(ctx, field)
+			case "cliqueType":
+				return ec.fieldContext_Character_cliqueType(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Character", field.Name)
 		},
@@ -603,6 +719,10 @@ func (ec *executionContext) fieldContext_Query_kooks(ctx context.Context, field 
 				return ec.fieldContext_Character_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Character_name(ctx, field)
+			case "isHero":
+				return ec.fieldContext_Character_isHero(ctx, field)
+			case "cliqueType":
+				return ec.fieldContext_Character_cliqueType(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Character", field.Name)
 		},
@@ -2517,7 +2637,7 @@ func (ec *executionContext) unmarshalInputCharacterInput(ctx context.Context, ob
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "id"}
+	fieldsInOrder := [...]string{"name", "id", "isHero", "cliqueType"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -2537,6 +2657,22 @@ func (ec *executionContext) unmarshalInputCharacterInput(ctx context.Context, ob
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
 			it.ID, err = ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+		case "isHero":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("isHero"))
+			it.IsHero, err = ec.unmarshalNBoolean2bool(ctx, v)
+			if err != nil {
+				return it, err
+			}
+		case "cliqueType":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("cliqueType"))
+			it.CliqueType, err = ec.unmarshalNCliqueType2githubᚗcomᚋgolangLearningᚋgqlᚋgraphᚋmodelᚐCliqueType(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -2574,6 +2710,20 @@ func (ec *executionContext) _Character(ctx context.Context, sel ast.SelectionSet
 		case "name":
 
 			out.Values[i] = ec._Character_name(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "isHero":
+
+			out.Values[i] = ec._Character_isHero(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "cliqueType":
+
+			out.Values[i] = ec._Character_cliqueType(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -3107,6 +3257,16 @@ func (ec *executionContext) marshalNCharacter2ᚖgithubᚗcomᚋgolangLearning�
 func (ec *executionContext) unmarshalNCharacterInput2githubᚗcomᚋgolangLearningᚋgqlᚋgraphᚋmodelᚐCharacterInput(ctx context.Context, v interface{}) (model.CharacterInput, error) {
 	res, err := ec.unmarshalInputCharacterInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNCliqueType2githubᚗcomᚋgolangLearningᚋgqlᚋgraphᚋmodelᚐCliqueType(ctx context.Context, v interface{}) (model.CliqueType, error) {
+	var res model.CliqueType
+	err := res.UnmarshalGQL(v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCliqueType2githubᚗcomᚋgolangLearningᚋgqlᚋgraphᚋmodelᚐCliqueType(ctx context.Context, sel ast.SelectionSet, v model.CliqueType) graphql.Marshaler {
+	return v
 }
 
 func (ec *executionContext) unmarshalNID2string(ctx context.Context, v interface{}) (string, error) {
