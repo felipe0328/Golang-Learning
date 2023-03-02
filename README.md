@@ -16,9 +16,12 @@ Frameworks used:
 
 
 ### Project #2 Graphl Implementation [gql](/gql/)
-Implenetation of a graphl service with go
+Implemetation of a graphl service with go
 
 Frameworks used:
 * [GrapghQl-go](https://github.com/graphql-go/graphql)
+
+### Project #3 gRCP Implementation [gRCP](/gRCP/)
+Implementation of gRCP using golang
 
 -- WIP--
