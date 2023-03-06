@@ -24,4 +24,6 @@ Frameworks used:
 ### Project #3 gRCP Implementation [gRCP](/gRCP/)
 Implementation of gRCP using golang
 
+for this project we will use the folowing packages:
+
 -- WIP--
